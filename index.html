@@ -1,0 +1,1217 @@
+<!DOCTYPE html>
+<html lang="de">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JGA Barcelona / Sitges – Reiseinfos</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f3f4f6; 
+            color: #374151; 
+        }
+
+        .info-card {
+            background-color: white;
+            border-radius: 12px; 
+            box-shadow: 0 8px 16px -3px rgba(0, 0, 0, 0.07), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+            padding: 1.5rem; 
+            position: relative; 
+            overflow: hidden; 
+            margin-bottom: 1.5rem; 
+            display: flex; 
+            flex-direction: column; 
+        }
+        .info-card:last-of-type { 
+             margin-bottom: 0;
+        }
+
+
+        .info-card::before { 
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background-color: #4f46e5; 
+        }
+        
+        .info-card.flight-card::before { background-color: #3b82f6; } 
+        .info-card.accommodation-card::before { background-color: #10b981; } 
+        .info-card.event-card::before { background-color: #ef4444; } 
+        .info-card.transport-card::before { background-color: #f97316; } 
+        .info-card.culinary-card::before { background-color: #d97706; } 
+        .info-card.leisure-card::before { background-color: #059669; } 
+        .info-card.contacts-card::before { background-color: #14b8a6; } 
+        
+        .card-title {
+            font-size: 1.25rem; 
+            font-weight: 600; 
+            color: #1f2937; 
+            margin-bottom: 1rem; 
+            padding-top: 0.5rem; 
+            display: flex;
+            align-items: center;
+        }
+
+        .card-title i {
+            margin-right: 0.75rem; 
+        }
+        .flight-card .card-title i { color: #3b82f6; }
+        .accommodation-card .card-title i { color: #10b981; }
+        .event-card .card-title i { color: #ef4444; }
+        .transport-card .card-title i { color: #f97316; }
+        .culinary-card .card-title i { color: #d97706; }
+        .leisure-card .card-title i { color: #059669; }
+        .contacts-card .card-title i { color: #14b8a6; }
+
+        /* General Info Item Styling */
+        .info-item {
+            display: flex;
+            flex-direction: column; 
+            margin-bottom: 0.75rem;
+            font-size: 0.95rem;
+        }
+
+        .info-item-label-container { 
+            display: flex;
+            align-items: center;
+            margin-bottom: 0.25rem; 
+        }
+        
+        .info-item-label-container i.fa-fw {
+            width: 1.25em;
+            text-align: center;
+            margin-right: 0.5rem;
+            color: #6b7280;
+            flex-shrink: 0;
+        }
+
+        .info-item-label-container strong {
+            font-weight: 500;
+            color: #4b5563;
+        }
+
+        .info-item-value-container { 
+            display: flex;
+            align-items: center;
+            flex-wrap: nowrap; 
+            width: 100%; 
+            padding-left: calc(1.25em + 0.5rem); 
+        }
+        
+        .info-item-value-container .value-text {
+            color: #1f2937;
+            word-break: break-all; 
+            flex-grow: 1; 
+            min-width: 0; 
+        }
+        .info-item-value-container a.value-text:hover {
+             color: #4f46e5; 
+            text-decoration: underline;
+        }
+
+
+        .info-item-value-container .copy-button {
+            margin-left: 0.5rem;
+            flex-shrink: 0; 
+        }
+        
+        /* Desktop specific adjustments for info-item */
+        @media (min-width: 640px) { 
+            .info-item {
+                flex-direction: row; 
+                align-items: flex-start; 
+            }
+            .info-item-label-container {
+                width: 170px; 
+                min-width: 170px; 
+                margin-bottom: 0; 
+                margin-right: 0.75rem; 
+                flex-shrink: 0; 
+            }
+            .info-item-value-container {
+                padding-left: 0; 
+                width: auto; 
+                flex-grow: 1; 
+            }
+        }
+        
+        .main-header-wrapper { 
+            max-width: 64rem; 
+            margin-left: auto;
+            margin-right: auto;
+            padding-left: 1rem; 
+            padding-right: 1rem; 
+            margin-bottom: 2.5rem; 
+        }
+         @media (min-width: 768px) { 
+            .main-header-wrapper {
+                 padding-left: 2rem;
+                 padding-right: 2rem;
+            }
+        }
+
+        /* Reverted Header Style */
+        .main-header-container {
+            padding: 2rem 1.5rem; 
+            background: linear-gradient(135deg, #8A2BE2 0%, #4A00E0 100%); /* Lila/Blau Verlauf */
+            border-radius: 12px;
+            box-shadow: 0 8px 16px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+            display: flex;
+            align-items: center; /* Vertikal zentrieren */
+        }
+        
+        .header-image-container {
+            flex-shrink: 0;
+            margin-right: 1.5rem; /* Abstand zum Text */
+        }
+        .header-image {
+            width: 80px; 
+            height: 80px;
+            border-radius: 50%; /* Rundes Bild */
+            object-fit: cover;
+            border: 3px solid white;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+        }
+
+        .header-text-container h1 {
+            font-size: 1.875rem; /* text-3xl */
+            font-weight: 700; 
+            color: white;
+            text-shadow: 0px 1px 3px rgba(0,0,0,0.25); 
+            line-height: 1.2; 
+        }
+        @media (min-width: 768px) { 
+            .header-text-container h1 {
+                font-size: 2.25rem; /* text-4xl */
+            }
+        }
+        .header-text-container p {
+            font-size: 1rem; 
+            color: #ede9fe; 
+            margin-top: 0.25rem;
+        }
+        .header-text-container .party-popper {
+            font-size: 1.5rem; /* Angepasst */
+            margin: 0 0.25rem;
+            display: inline-block;
+            animation: bounce 1.5s infinite;
+        }
+
+        @keyframes bounce { 
+            0%, 20%, 50%, 80%, 100% {transform: translateY(0);}
+            40% {transform: translateY(-8px);}
+            60% {transform: translateY(-4px);}
+        }
+        
+        .flights-grid {
+            display: grid;
+            grid-template-columns: 1fr; 
+            gap: 1.5rem; 
+            margin-bottom: 1.5rem;
+        }
+        @media (min-width: 1024px) { 
+             .flights-grid {
+                grid-template-columns: 1fr 1fr; 
+            }
+        }
+
+        .action-button, .google-maps-button, .tip-button, .ticket-button, .lineup-toggle-button, .collapsible-toggle-button, .airbnb-button { 
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0.625rem 1.25rem; 
+            color: white;
+            font-weight: 500;
+            border-radius: 8px;
+            text-decoration: none;
+            transition: background-color 0.2s ease-in-out;
+            margin-top: 1rem; 
+            cursor: pointer;
+            border: none; 
+        }
+        .google-maps-button {
+            background-color: #3b82f6; 
+        }
+        .google-maps-button:hover {
+            background-color: #2563eb; 
+        }
+        .airbnb-button {
+            background-color: #FF5A5F; 
+        }
+        .airbnb-button:hover {
+            background-color: #E00007;
+        }
+        .action-button.check-in { 
+            background-color: #10b981; 
+            width: 100%;
+            margin-top: auto; 
+        }
+        .action-button.check-in:hover {
+            background-color: #059669; 
+        }
+        .copy-button {
+            background-color: #6b7280; 
+            color: white;
+            padding: 0.25rem 0.6rem;
+            font-size: 0.75rem;
+            border-radius: 6px;
+            cursor: pointer;
+            border: none;
+        }
+        .copy-button:hover {
+            background-color: #4b5563;
+        }
+
+
+        .google-maps-button i, .tip-button i, .ticket-button i, .lineup-toggle-button i, .collapsible-toggle-button i, .airbnb-button i, .action-button i {
+            margin-right: 0.5rem;
+        }
+
+        .tip-button {
+            font-size: 0.8rem; 
+            padding: 0.4rem 0.8rem; 
+            margin-right: 0.5rem;
+            margin-top: 0.75rem; 
+        }
+        .tip-button.maps {
+            background-color: #34A853; 
+        }
+        .tip-button.maps:hover {
+            background-color: #1E8E3E;
+        }
+        .tip-button.website {
+            background-color: #4285F4; 
+        }
+        .tip-button.website:hover {
+            background-color: #1A73E8;
+        }
+        .ticket-button {
+            background-color: #6d28d9; 
+            font-size: 0.9rem;
+            padding: 0.5rem 1rem;
+            margin-right: 0.5rem;
+            margin-bottom: 0.5rem; 
+        }
+        .ticket-button:hover {
+            background-color: #5b21b6;
+        }
+        
+        .lineup-toggle-button, .collapsible-toggle-button {
+            background-color: #0d9488; 
+            width: 100%; 
+            margin-bottom: 1rem;
+        }
+        .lineup-toggle-button:hover, .collapsible-toggle-button:hover {
+            background-color: #0f766e;
+        }
+        .lineup-toggle-button .chevron-icon, .collapsible-toggle-button .chevron-icon {
+            transition: transform 0.3s ease-in-out;
+        }
+        .lineup-toggle-button.open .chevron-icon, .collapsible-toggle-button.open .chevron-icon {
+            transform: rotate(180deg);
+        }
+        .collapsible-content { 
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.5s ease-in-out, padding 0.3s ease-in-out;
+             padding: 0 1.5rem; 
+        }
+        .collapsible-content.open {
+             padding: 1.5rem; 
+        }
+        #lineupContentRazz { /* Behält sein spezifisches Padding */
+            padding: 0 1rem;
+        }
+        #lineupContentRazz.open {
+            padding: 1rem;
+        }
+
+
+        /* Styles for Tip Sections */
+        .tip-section-title {
+            font-size: 1.1rem; 
+            font-weight: 600;
+            color: #374151; 
+            margin-top: 1.25rem;
+            margin-bottom: 0.75rem;
+            padding-bottom: 0.25rem;
+            border-bottom: 2px solid #e5e7eb; 
+        }
+        .tip-section-title:first-of-type {
+            margin-top: 0; 
+        }
+
+        .tip-item {
+            background-color: #f9fafb; 
+            border-radius: 8px;
+            padding: 1rem;
+            margin-bottom: 1rem;
+        }
+        .tip-item:last-child {
+            margin-bottom: 0;
+        }
+
+        .tip-item-content { 
+            display: flex;
+            flex-direction: column; 
+        }
+        @media (min-width: 768px) { 
+            .tip-item-content {
+                flex-direction: row; 
+                align-items: flex-start; 
+            }
+        }
+
+        .tip-text-content { 
+            flex-grow: 1;
+        }
+        @media (min-width: 768px) { 
+            .tip-text-content {
+                padding-right: 1rem; 
+            }
+        }
+
+
+        .tip-image-container {
+            flex-shrink: 0;
+            width: 100%; 
+            margin-top: 1rem; 
+        }
+        @media (min-width: 768px) { 
+            .tip-image-container {
+                width: 150px; 
+                height: 120px; 
+                margin-top: 0;
+            }
+        }
+        .tip-image-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover; 
+            border-radius: 8px;
+        }
+
+
+        .tip-item h4 {
+            font-size: 1rem;
+            font-weight: 600;
+            color: #1f2937;
+            margin-bottom: 0.25rem;
+            display: flex;
+            align-items: center;
+        }
+        .tip-item h4 i {
+            margin-right: 0.5rem;
+            font-size: 0.9em; 
+        }
+        .tip-item p {
+            font-size: 0.9rem;
+            color: #4b5563; 
+            line-height: 1.5;
+        }
+        .tip-item .tip-meta { 
+            font-size: 0.8rem;
+            color: #6b7280; 
+            margin-top: 0.75rem; 
+        }
+         .tip-item .tip-meta-info { 
+            margin-bottom: 0.5rem;
+            display: block; 
+        }
+        .tip-item .tip-meta-info i { 
+            margin-right: 0.35rem; 
+            color: #6b7280; 
+        }
+        .tip-item .tip-actions { 
+            margin-top: 0.5rem;
+            display: flex; 
+            flex-wrap: wrap; 
+        }
+
+
+        /* Tip item accent colors (border-left) */
+        .tip-item.sitges-tip { border-left: 3px solid #2563eb; } 
+        .tip-item.sitges-tip h4 i { color: #2563eb; }
+        .tip-item.barcelona-tip { border-left: 3px solid #c026d3; } 
+        .tip-item.barcelona-tip h4 i { color: #c026d3; }
+        .tip-item.ebike-tip { border-left: 3px solid #047857; } 
+        .tip-item.ebike-tip h4 i { color: #047857; }
+        .tip-item.bunker-tip { border-left: 3px solid #f59e0b; } 
+        .tip-item.bunker-tip h4 i { color: #f59e0b; }
+        .tip-item.watersport-tip { border-left: 3px solid #0ea5e9; } 
+        .tip-item.watersport-tip h4 i { color: #0ea5e9; }
+        .tip-item.pinchos-tip { border-left: 3px solid #db2777; } 
+        .tip-item.pinchos-tip h4 i { color: #db2777; }
+        .tip-item.boat-trip-tip { border-left: 3px solid #0891b2; } 
+        .tip-item.boat-trip-tip h4 i { color: #0891b2; }
+        .tip-item.churros-tip { border-left: 3px solid #78350f; } 
+        .tip-item.churros-tip h4 i { color: #78350f; }
+        .tip-item.market-tip { border-left: 3px solid #fbbf24; } 
+        .tip-item.market-tip h4 i { color: #fbbf24; }
+        .tip-item.garden-tip { border-left: 3px solid #34d399; } 
+        .tip-item.garden-tip h4 i { color: #34d399; }
+
+
+        /* QR Code Modal Styles */
+        .modal {
+            display: none; 
+            position: fixed; 
+            z-index: 1001; 
+            left: 0;
+            top: 0;
+            width: 100%; 
+            height: 100%; 
+            overflow: auto; 
+            background-color: rgba(0,0,0,0.8); 
+            padding: 20px; 
+            align-items: center; 
+            justify-content: center; 
+        }
+
+        .modal-content {
+            background-color: #fefefe;
+            padding: 25px;
+            border: none; 
+            width: auto; 
+            max-width: 90vw; 
+            max-height: 90vh; 
+            border-radius: 10px;
+            text-align: center;
+            position: relative;
+            display: flex; 
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .qr-code-container { 
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        #qrCodeImage {
+            max-width: 100%; 
+            max-height: calc(90vh - 80px); 
+            height: auto;
+            border: 1px solid #ddd; 
+            object-fit: contain; 
+        }
+        #qrCodeText {
+            margin-top: 15px; 
+            font-family: 'Courier New', Courier, monospace; 
+            font-size: 1rem; 
+            color: #333;
+            background-color: #f0f0f0;
+            padding: 5px 10px;
+            border-radius: 4px;
+        }
+
+        .close-button {
+            color: #333; 
+            background-color: rgba(255,255,255,0.8);
+            border-radius: 50%;
+            width: 35px;
+            height: 35px;
+            line-height: 35px; 
+            text-align: center;
+            position: absolute;
+            top: 15px; 
+            right: 15px;
+            font-size: 28px;
+            font-weight: bold;
+            transition: background-color 0.2s, color 0.2s;
+        }
+
+        .close-button:hover,
+        .close-button:focus {
+            background-color: #e0e0e0;
+            color: black;
+            text-decoration: none;
+            cursor: pointer;
+        }
+        
+        /* Lineup Styles */
+        .lineup-section {
+            margin-top: 1.5rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid #e5e7eb;
+        }
+        .lineup-title-text { 
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: white; 
+        }
+        .lineup-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.5s ease-in-out, padding 0.3s ease-in-out;
+            padding: 0 1rem; 
+        }
+        .lineup-content.open {
+            padding: 1rem; 
+        }
+
+        .floor-block {
+            border-radius: 8px;
+            padding: 1rem;
+            margin-bottom: 1rem;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+        .floor-block h4 {
+            font-size: 1rem;
+            font-weight: 600;
+            color: #ffffff; 
+            margin-bottom: 0.5rem;
+        }
+        .floor-block p {
+            font-size: 0.9rem;
+            color: #f3f4f6; 
+            line-height: 1.5;
+        }
+        .floor-1 { background-color: #7c3aed; } 
+        .floor-2 { background-color: #db2777; } 
+        .floor-3 { background-color: #f59e0b; } 
+        .floor-4 { background-color: #16a34a; } 
+        .floor-5 { background-color: #2563eb; } 
+
+
+    </style>
+</head>
+
+<body class="p-4 md:p-8">
+    
+    <div class="main-header-wrapper"> <div class="main-header-container">
+            <div class="header-image-container">
+                <img src="https://i.imgur.com/376EU9E.png" alt="[Bild von Jan]" class="header-image">
+            </div>
+            <div class="header-text-container"> 
+                <h1>
+                    <span class="party-popper">🍹</span>
+                    Jan's JGA in Barcelona
+                    <span class="party-popper">🌴</span>
+                </h1>
+                <p>Alle wichtigen Infos auf einen Blick</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="container mx-auto max-w-5xl"> 
+        <div class="flights-grid">
+            <div class="info-card flight-card h-full"> 
+                <h2 class="card-title"><i class="fas fa-plane-departure"></i>Hinflug</h2>
+                <div class="info-item">
+                    <div class="info-item-label-container"><i class="fas fa-calendar-alt fa-fw"></i><strong>Datum:</strong></div>
+                    <div class="info-item-value-container"><span class="value-text">Donnerstag, 12. Juni 2025</span></div>
+                </div>
+                <div class="info-item">
+                    <div class="info-item-label-container"><i class="fas fa-clock fa-fw"></i><strong>Abflug:</strong></div>
+                    <div class="info-item-value-container"><span class="value-text">11:05 Uhr – Hamburg (HAM)</span></div>
+                </div>
+                <div class="info-item">
+                    <div class="info-item-label-container"><i class="fas fa-plane-arrival fa-fw"></i><strong>Ankunft:</strong></div>
+                    <div class="info-item-value-container"><span class="value-text">13:45 Uhr – Barcelona El Prat (BCN)</span></div>
+                </div>
+                <div class="info-item">
+                    <div class="info-item-label-container"><i class="fas fa-hashtag fa-fw"></i><strong>Flug­nr.:</strong></div>
+                    <div class="info-item-value-container"><span class="value-text" id="vuelingFlightNr">Vueling VY1821</span></div>
+                </div>
+                <div class="info-item">
+                    <div class="info-item-label-container"><i class="fas fa-ticket-alt fa-fw"></i><strong>Code:</strong></div>
+                    <div class="info-item-value-container">
+                        <span class="value-text mr-2" id="vuelingBookingCode">PCMG6L</span> 
+                        <button class="copy-button" onclick="copyToClipboard('vuelingBookingCode', this)">Kopieren</button>
+                    </div>
+                </div>
+                 <div class="info-item">
+                    <div class="info-item-label-container"><i class="fas fa-envelope fa-fw"></i><strong>E-Mail:</strong></div>
+                    <div class="info-item-value-container">
+                        <span class="value-text mr-2" id="vuelingEmail">2o5q0t1m1d36@flug.check24.de</span>
+                        <button class="copy-button" onclick="copyToClipboard('vuelingEmail', this)">Kopieren</button>
+                    </div>
+                </div>
+                <a href="https://tickets.vueling.com/checkin" target="_blank" class="action-button check-in">
+                    <i class="fas fa-user-check"></i>Online Check-in (Vueling)
+                </a>
+            </div>
+
+            <div class="info-card flight-card h-full"> 
+                <h2 class="card-title"><i class="fas fa-plane-arrival"></i>Rückflug</h2>
+                <div class="info-item">
+                    <div class="info-item-label-container"><i class="fas fa-calendar-alt fa-fw"></i><strong>Datum:</strong></div>
+                    <div class="info-item-value-container"><span class="value-text">Sonntag, 15. Juni 2025</span></div>
+                </div>
+                <div class="info-item">
+                    <div class="info-item-label-container"><i class="fas fa-plane-departure fa-fw"></i><strong>Abflug:</strong></div>
+                    <div class="info-item-value-container"><span class="value-text">19:25 Uhr – Barcelona El Prat (BCN)</span></div>
+                </div>
+                <div class="info-item">
+                    <div class="info-item-label-container"><i class="fas fa-clock fa-fw"></i><strong>Ankunft:</strong></div>
+                    <div class="info-item-value-container"><span class="value-text">22:05 Uhr – Berlin Brandenburg (BER)</span></div>
+                </div>
+                <div class="info-item">
+                    <div class="info-item-label-container"><i class="fas fa-hashtag fa-fw"></i><strong>Flug­nr.:</strong></div>
+                    <div class="info-item-value-container"><span class="value-text" id="ryanairFlightNr">Ryanair FR133</span></div>
+                </div>
+                <div class="info-item">
+                    <div class="info-item-label-container"><i class="fas fa-ticket-alt fa-fw"></i><strong>Buchungsnr.:</strong></div>
+                    <div class="info-item-value-container">
+                        <span class="value-text mr-2" id="ryanairBookingCode">PRJ2VZ</span>
+                        <button class="copy-button" onclick="copyToClipboard('ryanairBookingCode', this)">Kopieren</button>
+                    </div>
+                </div>
+                 <div class="info-item">
+                    <div class="info-item-label-container"><i class="fas fa-envelope fa-fw"></i><strong>E-Mail:</strong></div>
+                    <div class="info-item-value-container">
+                        <span class="value-text mr-2" id="ryanairEmail">205b0c3x351v@flug.check24.de</span>
+                        <button class="copy-button" onclick="copyToClipboard('ryanairEmail', this)">Kopieren</button>
+                    </div>
+                </div>
+                 <a href="https://www.ryanair.com/at/de/lp/check-in" target="_blank" class="action-button check-in">
+                    <i class="fas fa-user-check"></i>Online Check-in (Ryanair)
+                </a>
+            </div>
+        </div>
+
+        <div class="info-card accommodation-card"> 
+            <h2 class="card-title"><i class="fas fa-home"></i>Unterkunft (Villa)</h2>
+            <div class="md:flex md:space-x-6 md:items-stretch"> 
+                <div class="md:w-2/3">
+                    <div class="info-item">
+                        <div class="info-item-label-container"><i class="fas fa-calendar-day fa-fw"></i><strong>Zeitraum:</strong></div>
+                        <div class="info-item-value-container"><span class="value-text">Do, 12. Juni – So, 15. Juni 2025</span></div>
+                    </div>
+                    <div class="info-item">
+                        <div class="info-item-label-container"><i class="fas fa-map-marker-alt fa-fw"></i><strong>Adresse:</strong></div>
+                        <div class="info-item-value-container"><span class="value-text">Avinguda de Miquel Utrillo 38, 08870 Sitges, Spanien</span></div>
+                    </div>
+                    <div class="info-item">
+                        <div class="info-item-label-container"><i class="fas fa-user-tie fa-fw"></i><strong>Gastgeber:</strong></div>
+                        <div class="info-item-value-container"><span class="value-text">Arsenii Kulynych</span></div>
+                    </div>
+                    <div class="info-item">
+                        <div class="info-item-label-container"><i class="fas fa-key fa-fw"></i><strong>Bestätigungscode:</strong></div>
+                        <div class="info-item-value-container"><span class="value-text">HMBPJE8P2D</span></div>
+                    </div>
+                    <div class="flex space-x-2 mt-4">
+                        <a href="https://www.google.com/maps/search/?api=1&query=Avinguda+de+Miquel+Utrillo+38%2C+08870+Sitges%2C+Spanien" target="_blank" class="google-maps-button flex-1">
+                            <i class="fas fa-map-location-dot"></i>Google Maps
+                        </a>
+                        <a href="https://www.airbnb.de/rooms/850450021880454834?source_impression_id=p3_1744978548_P3j6h3-KCVcpCzvx" target="_blank" class="airbnb-button flex-1">
+                            <i class="fab fa-airbnb"></i>Airbnb
+                        </a>
+                    </div>
+                </div>
+                <div class="md:w-1/3 mt-6 md:mt-0 flex items-center justify-center">
+                    <img src="https://a0.muscache.com/im/pictures/miso/Hosting-850450021880454834/original/281f44e7-ec11-433d-bc13-6f19458a4d35.jpeg?im_w=1200" alt="[Bild der Villa]" class="rounded-lg shadow-md max-h-60 w-full object-cover">
+                </div>
+            </div>
+        </div>
+
+        <div class="info-card event-card">
+            <div class="md:flex md:space-x-6 md:items-stretch"> 
+                <div class="md:flex-grow">
+                    <h2 class="card-title"><i class="fas fa-glass-cheers"></i>Razzmatazz Club</h2>
+                    <div class="info-item">
+                        <div class="info-item-label-container"><i class="fas fa-calendar-check fa-fw"></i><strong>Datum:</strong></div>
+                        <div class="info-item-value-container"><span class="value-text">Freitag, 13. Juni 2025</span></div>
+                    </div>
+                    <div class="info-item">
+                        <div class="info-item-label-container"><i class="fas fa-clock fa-fw"></i><strong>Uhrzeit:</strong></div>
+                        <div class="info-item-value-container"><span class="value-text">23:59 Uhr</span></div>
+                    </div>
+                     <div class="info-item">
+                        <div class="info-item-label-container"><i class="fas fa-map-marker-alt fa-fw"></i><strong>Adresse:</strong></div>
+                        <div class="info-item-value-container"><span class="value-text">C/ dels Almogàvers, 122, Sant Martí, 08018 Barcelona</span></div>
+                    </div>
+                    <p class="text-red-600 font-semibold my-3"><i class="fas fa-id-card mr-2"></i>Wichtig: Ausweis für den Einlass erforderlich!</p>
+                     <div class="tip-actions mb-2"> 
+                        <a href="https://www.google.com/maps/search/?api=1&query=Razzmatazz+Clubs%2C+Carrer+dels+Almogàvers%2C+122%2C+Barcelona" target="_blank" class="tip-button maps">
+                            <i class="fas fa-map-location-dot"></i>Maps
+                        </a>
+                        <a href="https://www.salarazzmatazz.com/" target="_blank" class="tip-button website">
+                            <i class="fas fa-globe"></i>Website
+                        </a>
+                    </div>
+                </div>
+                <div class="md:w-1/3 mt-6 md:mt-0 flex items-center justify-center md:flex-shrink-0">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTRnwan4pSD_tk0LscCaHV7d13c_-xBmdq-yg&s" alt="[Bild vom Razzmatazz Club]" class="rounded-lg shadow-md max-h-60 w-full object-contain">
+                </div>
+            </div>
+
+            <div class="lineup-section">
+                <button id="lineupToggleButtonRazz" class="lineup-toggle-button">
+                    <i class="fas fa-headphones-alt"></i>
+                    <span class="lineup-title-text">Line-up anzeigen</span>
+                    <i class="fas fa-chevron-down chevron-icon ml-auto"></i>
+                </button>
+                <div id="lineupContentRazz" class="lineup-content">
+                    <div class="floor-block floor-1">
+                        <h4>FUEGO ROOM 1 - ROOM 1</h4>
+                        <p>ANDY C + OTO + SKIAT B2B LILAKK POWERED BY GREENLIGHT SOUND SYSTEM</p>
+                    </div>
+                    <div class="floor-block floor-2">
+                        <h4>FUEGO ROOM 2 - ROOM 2</h4>
+                        <p>TRATRATRAX: NICK LEÓN + LECHUGA ZAFIRO + EHUA + ISABELLA</p>
+                    </div>
+                    <div class="floor-block floor-3">
+                        <h4>FUEGO ROOM 3 - ROOM 3</h4>
+                        <p>UPPER90 + LAMMER + SAM GIRLING</p>
+                    </div>
+                    <div class="floor-block floor-4">
+                        <h4>FUEGO ROOM 4 - ROOM 4</h4>
+                        <p>ISLA 6: VENDREDEAR + WINIPU + ISOLANA + CHERRY BERRY + COOLKID2000</p>
+                    </div>
+                    <div class="floor-block floor-5">
+                        <h4>FUEGO ROOM 5 - ROOM 5</h4>
+                        <p>PRÍNCIPE: DJ NIGGA FOX (4-HOUR SET) + DJ NARCISO</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="mt-6"> <h3 class="text-md font-semibold text-gray-700 mb-2 pt-3 border-t border-gray-200">Tickets:</h3>
+                <p class="text-xs text-gray-500 mb-3">Klicke auf einen Button, um den QR-Code anzuzeigen.</p>
+                <div class="flex flex-wrap">
+                    <button class="ticket-button" 
+                            data-qrsrc="https://i.imgur.com/RsRS26A.png" 
+                            data-ticketcode="YttJ6Slj">
+                        <i class="fas fa-ticket-alt"></i>Ticket 1
+                    </button>
+                    <button class="ticket-button" 
+                            data-qrsrc="https://i.imgur.com/xCYnwq2.png" 
+                            data-ticketcode="c6Vsu4L-">
+                        <i class="fas fa-ticket-alt"></i>Ticket 2
+                    </button>
+                    <button class="ticket-button" 
+                            data-qrsrc="https://i.imgur.com/2g4E7KU.png" 
+                            data-ticketcode="hGs1jdyZ">
+                        <i class="fas fa-ticket-alt"></i>Ticket 3
+                    </button>
+                    <button class="ticket-button" 
+                            data-qrsrc="https://i.imgur.com/lD8ZNpz.png" 
+                            data-ticketcode="ITDrYDYO">
+                        <i class="fas fa-ticket-alt"></i>Ticket 4
+                    </button>
+                    <button class="ticket-button" 
+                            data-qrsrc="https://i.imgur.com/M5VWLHW.png" 
+                            data-ticketcode="pfahMo3P">
+                        <i class="fas fa-ticket-alt"></i>Ticket 5
+                    </button>
+                </div>
+            </div>
+        </div>
+        
+        <div class="info-card transport-card">
+            <h2 class="card-title"><i class="fas fa-bus-alt"></i>Transport</h2>
+             <div class="info-item">
+                 <div class="info-item-label-container"><i class="fas fa-train fa-fw"></i><strong>Zug (Tag):</strong></div>
+                <div class="info-item-value-container"><span class="value-text">Sitges <i class="fas fa-arrows-left-right text-xs mx-1"></i> Barcelona (R2)</span></div>
+            </div>
+             <div class="info-item">
+                <div class="info-item-label-container"><i class="fas fa-history fa-fw"></i><strong>Intervall:</strong></div>
+                <div class="info-item-value-container"><span class="value-text">Ca. alle 20-30 Min. (ca. 05:30-23:00)</span></div>
+            </div>
+            <div class="info-item">
+                <div class="info-item-label-container"><i class="fas fa-euro-sign fa-fw"></i><strong>Preis:</strong></div>
+                <div class="info-item-value-container"><span class="value-text">~5 €</span></div>
+            </div>
+            <div class="mt-4 pt-4 border-t border-gray-200"></div> 
+            <div class="info-item mt-4">
+                <div class="info-item-label-container"><i class="fas fa-moon fa-fw"></i><strong>Nachtbus:</strong></div>
+                <div class="info-item-value-container"><span class="value-text">BCN <i class="fas fa-arrow-right text-xs mx-1"></i> Sitges (N30 ab Pl. Catalunya)</span></div>
+            </div>
+            <div class="info-item">
+                <div class="info-item-label-container"><i class="fas fa-history fa-fw"></i><strong>Intervall:</strong></div>
+                <div class="info-item-value-container"><span class="value-text">Mehrmals/Nacht</span></div>
+            </div>
+             <div class="info-item">
+                <div class="info-item-label-container"><i class="fas fa-euro-sign fa-fw"></i><strong>Preis:</strong></div>
+                <div class="info-item-value-container"><span class="value-text">~4-5 €</span></div>
+            </div>
+             <p class="text-xs text-gray-500 mt-3"><i class="fas fa-info-circle mr-1"></i>Nachtbus ideal für Rückfahrt vom Razzmatazz.</p>
+        </div>
+
+        <div class="info-card contacts-card">
+            <button id="contactsToggleButton" class="collapsible-toggle-button w-full !mb-0"> <i class="fas fa-users"></i>
+                <span class="lineup-title-text">Wichtige Kontakte (JGA Gruppe)</span>
+                <i class="fas fa-chevron-down chevron-icon ml-auto"></i>
+            </button>
+            <div id="contactsContent" class="collapsible-content">
+                <div class="info-item mt-4"> 
+                    <div class="info-item-label-container"><i class="fas fa-phone-volume fa-fw text-red-600"></i><strong>Allg. Notruf:</strong></div>
+                    <div class="info-item-value-container"><span class="value-text font-semibold text-red-600">112 (EU-weit)</span></div>
+                </div>
+                <div class="pt-3 mt-3 border-t border-gray-200">
+                    <div class="info-item">
+                        <div class="info-item-label-container"><i class="fas fa-user fa-fw"></i><strong>Jan-Hendrik:</strong></div>
+                        <div class="info-item-value-container"><a href="tel:+491743809252" class="value-text hover:text-blue-600">+49 174 3809252</a></div>
+                    </div>
+                    <div class="info-item">
+                        <div class="info-item-label-container"><i class="fas fa-user fa-fw"></i><strong>Leon:</strong></div>
+                        <div class="info-item-value-container"><a href="tel:+491625768524" class="value-text hover:text-blue-600">+49 162 5768524</a></div>
+                    </div>
+                    <div class="info-item">
+                        <div class="info-item-label-container"><i class="fas fa-user fa-fw"></i><strong>Constantin:</strong></div>
+                        <div class="info-item-value-container"><a href="tel:+491604877826" class="value-text hover:text-blue-600">+49 160 4877826</a></div>
+                    </div>
+                    <div class="info-item">
+                        <div class="info-item-label-container"><i class="fas fa-user fa-fw"></i><strong>Maik:</strong></div>
+                        <div class="info-item-value-container"><a href="tel:+491726278869" class="value-text hover:text-blue-600">+49 172 6278869</a></div>
+                    </div>
+                    <div class="info-item">
+                        <div class="info-item-label-container"><i class="fas fa-user fa-fw"></i><strong>Philipp:</strong></div>
+                        <div class="info-item-value-container"><a href="tel:+4915209415469" class="value-text hover:text-blue-600">+49 1520 9415469</a></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="info-card culinary-card"> <h2 class="card-title"><i class="fas fa-utensils"></i>Kulinarische Highlights</h2>
+            
+            <h3 class="tip-section-title">In Sitges</h3>
+            <div class="tip-item sitges-tip">
+                <div class="tip-item-content">
+                    <div class="tip-text-content">
+                        <h4><i class="fas fa-pepper-hot"></i>El Cable</h4>
+                        <p>DER Tapas-Klassiker für Locals. Legendäre Patatas Bravas & Calamari. Rustikal, laut, lecker!</p>
+                        <div class="tip-meta">
+                            <span class="tip-meta-info"><i class="fas fa-map-marker-alt"></i>Carrer Barcelona 1 <span class="mx-2">|</span> <i class="fas fa-lightbulb"></i>Früh da sein/reservieren.</span>
+                            <div class="tip-actions">
+                                <a href="https://www.google.com/maps/search/?api=1&query=El+Cable%2C+Carrer+Barcelona+1%2C+Sitges" target="_blank" class="tip-button maps">
+                                    <i class="fas fa-map-location-dot"></i>Maps
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="tip-image-container">
+                        <img src="https://dynamic-media-cdn.tripadvisor.com/media/photo-o/0f/f4/9c/70/photo2jpg.jpg?w=1200&h=-1&s=1" alt="[Bild von Tapas bei El Cable]">
+                    </div>
+                </div>
+            </div>
+            <div class="tip-item sitges-tip">
+                 <div class="tip-item-content">
+                    <div class="tip-text-content">
+                        <h4><i class="fas fa-fish"></i>La Zorra</h4>
+                        <p>Moderne Reisspezialitäten (gehobene Paella). Stylisch, Meerblick-Terrasse. Perfekt für schickeres Dinner.</p>
+                        <div class="tip-meta">
+                            <span class="tip-meta-info"><i class="fas fa-map-marker-alt"></i>Passeig Marítim 1 <span class="mx-2">|</span> <i class="fas fa-lightbulb"></i>Fideuà Negra probieren!</span>
+                            <div class="tip-actions">
+                                 <a href="https://www.google.com/maps/search/?api=1&query=La+Zorra%2C+Passeig+Marítim+1%2C+Sitges" target="_blank" class="tip-button maps">
+                                    <i class="fas fa-map-location-dot"></i>Maps
+                                </a>
+                                <a href="https://restaurantelazorra.com/" target="_blank" class="tip-button website"> <i class="fas fa-globe"></i>Website
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="tip-image-container">
+                         <img src="https://dynamic-media-cdn.tripadvisor.com/media/photo-o/0c/86/e0/b5/la-zorra.jpg?w=300&h=-1&s=1" alt="[Bild von Paella bei La Zorra]">
+                    </div>
+                </div>
+            </div>
+
+            <h3 class="tip-section-title">In Barcelona</h3>
+             <div class="tip-item churros-tip"> 
+                <div class="tip-item-content">
+                    <div class="tip-text-content">
+                        <h4><i class="fas fa-ice-cream"></i>Churros bei Be Chocolat</h4>
+                        <p>Ein Muss für Naschkatzen: Leckere, frische Churros mit dickflüssiger Schokolade.</p>
+                         <div class="tip-meta">
+                            <span class="tip-meta-info"><i class="fas fa-map-marker-alt"></i>Carrer dels Banys Nous, 17 (oder andere Filialen)</span>
+                            <div class="tip-actions">
+                                <a href="https://www.google.com/maps/place/Be+Chocolat+%7C+G%C3%B2tic/@41.3826727,2.1697688,815m/data=!3m2!1e3!4b1!4m6!3m5!1s0x12a4a3e7e7c47a2d:0xefd3840cced90d84!8m2!3d41.3826688!4d2.1746397!16s%2Fg%2F11f9yfcz98?entry=ttu&g_ep=EgoyMDI1MDUxMi4wIKXMDSoASAFQAw%3D%3D" target="_blank" class="tip-button maps">
+                                    <i class="fas fa-map-location-dot"></i>Maps
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="tip-image-container">
+                        <img src="https://dynamic-media-cdn.tripadvisor.com/media/photo-o/17/3b/43/9d/photo2jpg.jpg?w=1000&h=-1&s=1" alt="[Bild von Churros mit Schokolade]">
+                    </div>
+                </div>
+            </div>
+             <div class="tip-item market-tip"> 
+                <div class="tip-item-content">
+                    <div class="tip-text-content">
+                        <h4><i class="fas fa-shopping-basket"></i>Mercat de la Boqueria</h4>
+                        <p>Berühmter Markt an Las Ramblas. Farbenfroh, lebhaft – perfekt für frische Säfte, Obst & zum Schauen.</p>
+                        <div class="tip-meta">
+                            <span class="tip-meta-info"><i class="fas fa-map-marker-alt"></i>La Rambla, 91</span>
+                            <div class="tip-actions">
+                                <a href="https://www.google.com/maps/embed/v1/place?key=YOUR_API_KEY&q=Space+Needle,Seattle+WA4" target="_blank" class="tip-button maps">
+                                    <i class="fas fa-map-location-dot"></i>Maps
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="tip-image-container">
+                        <img src="https://lp-cms-production.imgix.net/2025-02/shutterstock1238252371.jpg?auto=format,compress&q=72&w=1440&h=810&fit=crop" alt="[Bild vom Markt La Boqueria]">
+                    </div>
+                </div>
+            </div>
+            <div class="tip-item barcelona-tip">
+                <div class="tip-item-content">
+                    <div class="tip-text-content">
+                        <h4><i class="fas fa-wine-bottle"></i>Bodega Biarritz 1881</h4>
+                        <p>Mini-Tapas-Tempel im Gotischen Viertel. Sehr klein, ohne Reservierung, aber unfassbar gut! "Tapas-Sampler" wird frisch gebracht.</p>
+                         <div class="tip-meta">
+                            <span class="tip-meta-info"><i class="fas fa-map-marker-alt"></i>Carrer del Vidre, 8</span>
+                            <div class="tip-actions">
+                                <a href="https://www.google.com/maps/search/?api=1&query=Bodega+Biarritz+1881%2C+Carrer+del+Vidre%2C+8%2C+Barcelona" target="_blank" class="tip-button maps">
+                                    <i class="fas fa-map-location-dot"></i>Maps
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="tip-image-container">
+                        <img src="https://dynamic-media-cdn.tripadvisor.com/media/photo-o/04/17/ed/13/bodega-biarritz-1881.jpg?w=600&h=400&s=1" alt="[Bild der Bodega Biarritz]">
+                    </div>
+                </div>
+            </div>
+            <div class="tip-item barcelona-tip">
+                <div class="tip-item-content">
+                    <div class="tip-text-content">
+                        <h4><i class="fas fa-concierge-bell"></i>Bar del Pla</h4>
+                        <p>Kreative Tapas & entspannte Atmosphäre in El Born. Stylisch & lecker, gute Weine, sensationelle Schweinebäckchen.</p>
+                        <div class="tip-meta">
+                            <span class="tip-meta-info"><i class="fas fa-map-marker-alt"></i>Carrer de Montcada, 2</span>
+                            <div class="tip-actions">
+                                <a href="https://www.google.com/maps/search/?api=1&query=Bar+del+Pla%2C+Carrer+de+Montcada%2C+2%2C+Barcelona" target="_blank" class="tip-button maps">
+                                    <i class="fas fa-map-location-dot"></i>Maps
+                                </a>
+                                 <a href="http://www.bardelpla.cat/" target="_blank" class="tip-button website"> <i class="fas fa-globe"></i>Website
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="tip-image-container">
+                         <img src="https://media.cntraveler.com/photos/5a8d9ed14ff8184d0cc2db00/master/pass/BAR-DEL-PLA-Bar-de-tapas-Barcelona.jpg" alt="[Bild von Tapas in der Bar del Pla]">
+                    </div>
+                </div>
+            </div>
+             <div class="tip-item pinchos-tip">
+                <div class="tip-item-content">
+                    <div class="tip-text-content">
+                        <h4><i class="fas fa-bread-slice"></i>Pinchos-Straße "Carrer de Blai"</h4>
+                        <p>Essen als Erlebnis in Poble Sec (BCN). Jedes Häppchen ~1–2 €. Authentisch & ideal fürs Pre-Drinking.</p>
+                        <div class="tip-meta">
+                            <span class="tip-meta-info"><i class="fas fa-lightbulb"></i>Kombinierbar mit E-Bike oder vor Razzmatazz.</span>
+                            <div class="tip-actions">
+                                <a href="https://www.google.com/maps/search/?api=1&query=Carrer+de+Blai%2C+Barcelona" target="_blank" class="tip-button maps">
+                                    <i class="fas fa-map-location-dot"></i>Maps </a>
+                            </div>
+                        </div>
+                    </div>
+                     <div class="tip-image-container">
+                        <img src="https://reisevergnuegen.com/wp-content/uploads/sites/5/2022/10/tasquetadeblai-alernative-2.png" alt="[Bild von Pinchos]">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="info-card leisure-card"> <h2 class="card-title"><i class="fas fa-person-running"></i>Freizeit & Entdeckungen</h2> 
+             <div class="tip-item garden-tip"> 
+                <div class="tip-item-content">
+                    <div class="tip-text-content">
+                        <h4><i class="fas fa-leaf"></i>Jardins de Mossèn Costa i Llobera</h4>
+                        <p>Einzigartiger Kaktusgarten am Montjuïc mit tollem Blick auf den Hafen. Ruhig & besonders.</p>
+                         <div class="tip-meta">
+                            <span class="tip-meta-info"><i class="fas fa-map-marker-alt"></i>Ctra. de Miramar, 38</span>
+                            <div class="tip-actions">
+                                <a href="https://www.google.com/maps/embed/v1/place?key=YOUR_API_KEY&q=Space+Needle,Seattle+WA5" target="_blank" class="tip-button maps">
+                                    <i class="fas fa-map-location-dot"></i>Maps
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="tip-image-container">
+                        <img src="https://lh3.googleusercontent.com/gps-cs-s/AC9h4nrRb8ozw8sMT6z0id_KhPl9-3MrTo7dk23kQTXEJTZ6cdXORmfF-AqKJypXzD1o5Dc_kIXb0U9Inf4H4W1IpEdc_zDrC6obpKkWbAF6TFQc70_8SOes02Tdy-xcBwMTRBanmWQNoQ=s680-w680-h510-rw" alt="[Bild vom Kaktusgarten Jardins de Mossèn Costa i Llobera]" onerror="this.onerror=null; this.src='https://placehold.co/300x240/34D399/FFFFFF?text=Kaktusgarten&font=inter';">
+                    </div>
+                </div>
+            </div>
+            <div class="tip-item ebike-tip">
+                <div class="tip-item-content">
+                    <div class="tip-text-content">
+                        <h4><i class="fas fa-bicycle"></i>E-Bike-Tour</h4>
+                        <p>Küste + Montjuïc: Chilliges Cruisen mit Aussicht & Action. Optionale Bierpause am Strand/Aussichtspunkt.</p>
+                        <p class="tip-meta"><i class="fas fa-euro-sign"></i> Bikes ~25–30 € für 4h</p>
+                    </div>
+                    <div class="tip-image-container">
+                        <img src="https://www.euspa.europa.eu/sites/default/files/styles/1024x/public/files/content/news/images/home/bicing_barcelona_news.jpg?itok=Id5Wq1O3" alt="[Bild einer E-Bike-Tour]">
+                    </div>
+                </div>
+            </div>
+            <div class="tip-item bunker-tip">
+                 <div class="tip-item-content">
+                    <div class="tip-text-content">
+                        <h4><i class="fas fa-binoculars"></i>Bunker del Carmel</h4>
+                        <p>Kostenloser Panoramablick über Barcelona. Perfekt für Sonnenuntergang mit mitgebrachtem Bier.</p>
+                        <div class="tip-meta">
+                            <span class="tip-meta-info"><i class="fas fa-lightbulb"></i>Taxi/Uber hoch, zu Fuß runter.</span>
+                            <div class="tip-actions">
+                                 <a href="https://www.google.com/maps/search/?api=1&query=Bunker+del+Carmel%2C+Barcelona" target="_blank" class="tip-button maps">
+                                    <i class="fas fa-map-location-dot"></i>Maps
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="tip-image-container">
+                        <img src="https://go2barcelona.de/images/bunkers_del_carmel.jpg" alt="[Bild der Aussicht vom Bunker del Carmel]">
+                    </div>
+                </div>
+            </div>
+            <div class="tip-item watersport-tip">
+                <div class="tip-item-content">
+                    <div class="tip-text-content">
+                        <h4><i class="fas fa-water"></i>Wassersport in Sitges</h4>
+                        <p>SUP oder Jet Ski direkt am Strand (Port d’Aiguadolç) buchbar. Kurz, spaßig, erfrischend!</p>
+                         <div class="tip-meta">
+                            <span class="tip-meta-info"><i class="fas fa-euro-sign"></i>SUP ~15€/h, Jet Ski ~50-60€/30Min.</span>
+                            <div class="tip-actions">
+                                <a href="https://www.google.com/maps/search/?api=1&query=Port+d%E2%80%99Aiguadolç%2C+Sitges" target="_blank" class="tip-button maps">
+                                    <i class="fas fa-map-location-dot"></i>Maps </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="tip-image-container">
+                        <img src="https://veronikasadventure.com/wp-content/uploads/2024/01/2_sup-experience-in-barcelona-with-the-option-of-sunset-or-sunrise.jpg" alt="[Bild von Stand-Up Paddling]">
+                    </div>
+                </div>
+            </div>
+            <div class="tip-item boat-trip-tip">
+                <div class="tip-item-content">
+                    <div class="tip-text-content">
+                        <h4><i class="fas fa-ship"></i>Bootstour</h4>
+                        <p>Entspannte Stunden auf dem Meer (Sitges/Barcelona), evtl. mit Musik & Drinks. Ideal für Gruppen!</p>
+                        <p class="tip-meta"><i class="fas fa-euro-sign"></i> Partyboote/Gruppentouren ~50-70 € p.P.</p>
+                    </div>
+                    <div class="tip-image-container">
+                         <img src="https://go2barcelona.de/images/bootsfahrt-barcelona.jpg" alt="[Bild einer Bootstour]">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div> 
+</div> 
+
+<div id="qrModal" class="modal">
+    <div class="modal-content">
+        <span class="close-button">×</span>
+        <div class="qr-code-container">
+            <img id="qrCodeImage" src="" alt="[QR-Code Bild konnte nicht geladen werden. Bitte Link prüfen und sicherstellen, dass das Bild öffentlich zugänglich ist.]" onerror="this.alt='[QR-Code Bild konnte nicht geladen werden. Bitte Link prüfen und sicherstellen, dass das Bild öffentlich zugänglich ist.]'; this.src='https://placehold.co/250x250/CCCCCC/FFFFFF?text=Fehler%0ABild-URL%0Apr%C3%BCfen';">
+            <p id="qrCodeText" class="mt-2"></p>
+        </div>
+    </div>
+</div>
+
+<footer class="text-center pb-10 pt-4 text-gray-500 text-sm">
+    <p>Wer das liest ist doof.</p>
+</footer>
+
+<script>
+    // QR Code Modal Functionality
+    const modal = document.getElementById('qrModal');
+    const modalImg = document.getElementById('qrCodeImage');
+    const qrCodeTextEl = document.getElementById('qrCodeText'); 
+    const ticketButtons = document.querySelectorAll('.ticket-button');
+    const closeBtn = document.querySelector('.close-button');
+
+    ticketButtons.forEach((button, index) => {
+        button.onclick = function() {
+            modal.style.display = "flex"; 
+            const qrSrc = this.dataset.qrsrc;
+            const ticketCode = this.dataset.ticketcode; 
+            
+            modalImg.src = qrSrc; 
+            qrCodeTextEl.textContent = ticketCode; 
+        }
+    });
+
+    closeBtn.onclick = function() {
+        modal.style.display = "none";
+    }
+
+    window.onclick = function(event) {
+        if (event.target == modal) {
+            modal.style.display = "none";
+        }
+    }
+
+    // Generic Collapsible Functionality
+    function setupCollapsible(buttonId, contentId, openText, closedText) {
+        const toggleButton = document.getElementById(buttonId);
+        if (!toggleButton) return; 
+        const content = document.getElementById(contentId);
+        if (!content) return; 
+
+        const toggleTextSpan = toggleButton.querySelector('.lineup-title-text') || toggleButton.querySelector('span'); 
+        const chevronIcon = toggleButton.querySelector('.chevron-icon');
+
+        toggleButton.addEventListener('click', () => {
+            const isOpen = content.classList.contains('open');
+            if (isOpen) {
+                content.classList.remove('open');
+                content.style.maxHeight = null;
+                content.style.paddingTop = '0'; 
+                content.style.paddingBottom = '0';
+                toggleButton.classList.remove('open');
+                if (toggleTextSpan && closedText) toggleTextSpan.textContent = closedText;
+            } else {
+                content.classList.add('open');
+                content.style.maxHeight = content.scrollHeight + "px";
+                toggleButton.classList.add('open');
+                if (toggleTextSpan && openText) toggleTextSpan.textContent = openText;
+            }
+        });
+    }
+
+    setupCollapsible('lineupToggleButtonRazz', 'lineupContentRazz', 'Line-up verbergen', 'Line-up anzeigen');
+    setupCollapsible('contactsToggleButton', 'contactsContent', 'Kontakte verbergen', 'Wichtige Kontakte (JGA Gruppe)');
+    
+    // Copy to Clipboard Functionality
+    function copyToClipboard(elementId, buttonElement) {
+        let textToCopy = '';
+        const targetElement = document.getElementById(elementId);
+        if (targetElement) {
+            textToCopy = targetElement.innerText;
+        } else {
+            // Fallback, falls die ID nicht direkt am Span ist, sondern am Button-Geschwister
+            const valueSpan = buttonElement.closest('.info-item-value-container').querySelector('.value-text');
+            if (valueSpan) {
+                 textToCopy = valueSpan.innerText;
+            }
+        }
+        
+        if (textToCopy) {
+            navigator.clipboard.writeText(textToCopy).then(function() {
+                const originalButtonText = buttonElement.innerText;
+                buttonElement.innerText = 'Kopiert!';
+                buttonElement.classList.add('bg-green-500'); // Tailwind Klasse für grünen Hintergrund
+                buttonElement.classList.remove('bg-gray-500'); // Tailwind Klasse für grauen Hintergrund entfernen
+                setTimeout(function() {
+                    buttonElement.innerText = originalButtonText;
+                    buttonElement.classList.remove('bg-green-500');
+                    buttonElement.classList.add('bg-gray-500');
+                }, 1500); 
+            }, function(err) {
+                console.error('Fehler beim Kopieren des Textes: ', err);
+                alert("Fehler beim Kopieren. Bitte manuell kopieren.");
+            });
+        } else {
+             console.error('Element zum Kopieren nicht gefunden oder kein Text vorhanden für ID:', elementId);
+             alert("Fehler: Element zum Kopieren nicht gefunden.");
+        }
+    }
+
+</script>
+
+</body>
+</html>
