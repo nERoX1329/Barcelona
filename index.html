@@ -43,7 +43,7 @@
         
         .info-card.flight-card::before { background-color: #3b82f6; } 
         .info-card.accommodation-card::before { background-color: #10b981; } 
-        /* .info-card.weather-card::before { background-color: #06b6d4; } Entfernt */
+        /* .info-card.weather-card::before { background-color: #06b6d4; } */
         .info-card.event-card::before { background-color: #ef4444; } 
         .info-card.transport-card::before { background-color: #f97316; } 
         .info-card.culinary-card::before { background-color: #d97706; } 
@@ -65,7 +65,7 @@
         }
         .flight-card .card-title i { color: #3b82f6; }
         .accommodation-card .card-title i { color: #10b981; }
-        /* .weather-card .card-title i { color: #06b6d4; } Entfernt */
+        /* .weather-card .card-title i { color: #06b6d4; } */
         .event-card .card-title i { color: #ef4444; }
         .transport-card .card-title i { color: #f97316; }
         .culinary-card .card-title i { color: #d97706; }
@@ -180,9 +180,55 @@
                 font-size: 3rem; 
             }
         }
-        .main-header-container p {
+        .main-header-container p.subtitle { /* Eigene Klasse für den Untertitel */
             font-size: 1.125rem; 
             color: rgba(255,255,255,0.9); 
+            margin-bottom: 1.5rem; /* Platz für den Countdown */
+        }
+        
+        #countdown-container {
+            text-align: center; 
+        }
+        #countdown {
+            display: flex;
+            justify-content: center; 
+            gap: 0.5rem; 
+            margin-top: 1rem; /* Abstand zum Untertitel */
+        }
+        #countdown > div {
+            background-color: rgba(255, 255, 255, 0.2); /* Leicht transparenter Hintergrund */
+            padding: 0.5rem 0.75rem;
+            border-radius: 0.375rem; /* rounded-md */
+            min-width: 60px; 
+        }
+        #countdown > div span {
+            font-size: 1.875rem; /* text-3xl */
+            font-weight: 700; /* font-bold */
+            color: white;
+            display: block; 
+        }
+        #countdown > div div {
+            font-size: 0.75rem; /* text-xs */
+            text-transform: uppercase;
+            color: rgba(255,255,255,0.8);
+        }
+        @media (min-width: 640px) {
+            #countdown > div {
+                padding: 0.75rem 1rem;
+                min-width: 80px;
+            }
+            #countdown > div span {
+                 font-size: 2.25rem; /* text-4xl */
+            }
+             #countdown > div div {
+                 font-size: 0.875rem; /* text-sm */
+            }
+        }
+        #countdown-message { /* Für die Nachricht nach Ablauf */
+            margin-top: 1.5rem;
+            font-size: 1.5rem;
+            color: #facc15; /* Gelb */
+            font-weight: bold;
         }
         
         .flights-grid {
@@ -568,8 +614,17 @@
         <div class="main-header-container">
             <div class="header-text-container text-center w-full"> 
                 <h1>Jan's JGA in Barcelona</h1>
-                <p>Alle wichtigen Infos auf einen Blick</p>
-            </div>
+                <p class="subtitle">Alle wichtigen Infos auf einen Blick</p>
+                <div id="countdown-container">
+                    <div id="countdown" class="flex justify-center space-x-2 sm:space-x-3">
+                        <div><span id="days">00</span><div>Tage</div></div>
+                        <div><span id="hours">00</span><div>Std.</div></div>
+                        <div><span id="minutes">00</span><div>Min.</div></div>
+                        <div><span id="seconds">00</span><div>Sek.</div></div>
+                    </div>
+                    <div id="countdown-message" class="mt-4 text-xl text-yellow-300 font-bold" style="display:none;"></div>
+                </div>
+                </div>
         </div>
     </div>
 
@@ -780,9 +835,9 @@
             </div>
             
             <div class="info-card transport-card">
-                <h2 class="card-title"><i class="fas fa-bus-alt"></i>Transport</h2>
+                <h2 class="card-title"><i class="fas fa-bus-alt transport-icon-animated"></i>Transport</h2>
                  <div class="info-item">
-                     <div class="info-item-label-container"><i class="fas fa-train fa-fw"></i><strong>Zug (Tag):</strong></div>
+                     <div class="info-item-label-container"><i class="fas fa-train fa-fw transport-icon-animated"></i><strong>Zug (Tag):</strong></div>
                     <div class="info-item-value-container"><span class="value-text">Sitges <i class="fas fa-arrows-left-right text-xs mx-1"></i> Barcelona (R2)</span></div>
                 </div>
                  <div class="info-item">
@@ -795,7 +850,7 @@
                 </div>
                 <div class="mt-4 pt-4 border-t border-gray-200"></div> 
                 <div class="info-item mt-4">
-                    <div class="info-item-label-container"><i class="fas fa-moon fa-fw"></i><strong>Nachtbus:</strong></div>
+                    <div class="info-item-label-container"><i class="fas fa-moon fa-fw transport-icon-animated"></i><strong>Nachtbus:</strong></div>
                     <div class="info-item-value-container"><span class="value-text">BCN <i class="fas fa-arrow-right text-xs mx-1"></i> Sitges (N30 ab Pl. Catalunya)</span></div>
                 </div>
                 <div class="info-item">
@@ -821,23 +876,23 @@
                     </div>
                     <div class="pt-3 mt-3 border-t border-gray-200">
                         <div class="info-item">
-                            <div class="info-item-label-container"><i class="fas fa-user fa-fw"></i><strong>Jan-Hendrik:</strong></div>
+                            <div class="info-item-label-container"><i class="fas fa-user fa-fw"></i><strong>Jan-Hendrik Opitz:</strong></div>
                             <div class="info-item-value-container"><a href="tel:+491743809252" class="value-text hover:text-blue-600">+49 174 3809252</a></div>
                         </div>
                         <div class="info-item">
-                            <div class="info-item-label-container"><i class="fas fa-user fa-fw"></i><strong>Leon:</strong></div>
+                            <div class="info-item-label-container"><i class="fas fa-user fa-fw"></i><strong>Leon Opitz:</strong></div>
                             <div class="info-item-value-container"><a href="tel:+491625768524" class="value-text hover:text-blue-600">+49 162 5768524</a></div>
                         </div>
                         <div class="info-item">
-                            <div class="info-item-label-container"><i class="fas fa-user fa-fw"></i><strong>Constantin:</strong></div>
+                            <div class="info-item-label-container"><i class="fas fa-user fa-fw"></i><strong>Constantin Volquardts:</strong></div>
                             <div class="info-item-value-container"><a href="tel:+491604877826" class="value-text hover:text-blue-600">+49 160 4877826</a></div>
                         </div>
                         <div class="info-item">
-                            <div class="info-item-label-container"><i class="fas fa-user fa-fw"></i><strong>Maik:</strong></div>
+                            <div class="info-item-label-container"><i class="fas fa-user fa-fw"></i><strong>Maik Wedig:</strong></div>
                             <div class="info-item-value-container"><a href="tel:+491726278869" class="value-text hover:text-blue-600">+49 172 6278869</a></div>
                         </div>
                         <div class="info-item">
-                            <div class="info-item-label-container"><i class="fas fa-user fa-fw"></i><strong>Philipp:</strong></div>
+                            <div class="info-item-label-container"><i class="fas fa-user fa-fw"></i><strong>Philipp Poschmann:</strong></div>
                             <div class="info-item-value-container"><a href="tel:+4915209415469" class="value-text hover:text-blue-600">+49 1520 9415469</a></div>
                         </div>
                     </div>
@@ -1183,6 +1238,39 @@
              alert("Fehler: Element zum Kopieren nicht gefunden.");
         }
     }
+
+    // Countdown Timer
+    const countdownDate = new Date("June 12, 2025 08:00:00").getTime();
+
+    const countdownFunction = setInterval(function() {
+        const now = new Date().getTime();
+        const distance = countdownDate - now;
+
+        const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+        const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+        const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+        document.getElementById("days").innerText = days < 10 ? "0" + days : days;
+        document.getElementById("hours").innerText = hours < 10 ? "0" + hours : hours;
+        document.getElementById("minutes").innerText = minutes < 10 ? "0" + minutes : minutes;
+        document.getElementById("seconds").innerText = seconds < 10 ? "0" + seconds : seconds;
+        
+        const countdownElement = document.getElementById("countdown");
+        const messageElement = document.getElementById("countdown-message");
+
+        if (distance < 0) {
+            clearInterval(countdownFunction);
+            if(countdownElement) countdownElement.style.display = "none";
+            if(messageElement) {
+                messageElement.innerText = "✈️ JGA TIME! Ab nach Barcelona! 🎉";
+                messageElement.style.display = "block";
+            }
+        } else {
+            if(countdownElement) countdownElement.style.display = "flex";
+            if(messageElement) messageElement.style.display = "none";
+        }
+    }, 1000);
 
 </script>
 
