@@ -279,6 +279,7 @@
         .unlock-button {
             background-color: #f59e0b; /* Amber */
             width: 100%;
+            margin-top: auto; /* Stellt sicher, dass der Button unten ist */
         }
         .unlock-button:hover {
             background-color: #d97706; /* Darker Amber */
@@ -682,7 +683,7 @@
                         <div class="info-item-label-container"><i class="fas fa-plane-arrival fa-fw"></i><strong>Ankunft:</strong></div>
                         <div class="info-item-value-container"><span class="value-text">13:45 Uhr – Barcelona El Prat (BCN)</span></div>
                     </div>
-                    <button class="unlock-button mt-4" data-target="vuelingDetails"><i class="fas fa-lock"></i> Check-in Details anzeigen</button>
+                    <button class="unlock-button mt-auto" data-target="vuelingDetails"><i class="fas fa-lock"></i> Check-in Details anzeigen</button>
                     <div id="vuelingDetails" class="hidden mt-3">
                         <div class="info-item">
                             <div class="info-item-label-container"><i class="fas fa-hashtag fa-fw"></i><strong>Flug­nr.:</strong></div>
@@ -722,7 +723,7 @@
                         <div class="info-item-label-container"><i class="fas fa-clock fa-fw"></i><strong>Ankunft:</strong></div>
                         <div class="info-item-value-container"><span class="value-text">22:05 Uhr – Berlin Brandenburg (BER)</span></div>
                     </div>
-                    <button class="unlock-button mt-4" data-target="ryanairDetails"><i class="fas fa-lock"></i> Check-in Details anzeigen</button>
+                    <button class="unlock-button mt-auto" data-target="ryanairDetails"><i class="fas fa-lock"></i> Check-in Details anzeigen</button>
                     <div id="ryanairDetails" class="hidden mt-3">
                         <div class="info-item">
                             <div class="info-item-label-container"><i class="fas fa-hashtag fa-fw"></i><strong>Flug­nr.:</strong></div>
@@ -1400,4 +1401,3 @@
 
 </body>
 </html>
-
