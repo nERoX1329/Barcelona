@@ -1236,16 +1236,15 @@
     const passwordSubmit = document.getElementById('passwordSubmit');
     const passwordError = document.getElementById('passwordError');
     const closePasswordModalBtn = document.getElementById('closePasswordModal');
-    let currentProtectedSection = null;
+    let currentProtectedSectionId = null;
 
-    // Das Passwort (nur für Demo-Zwecke hier, NICHT SICHER!)
     const CORRECT_PASSWORD = "jga2025"; 
 
     document.querySelectorAll('.unlock-button').forEach(button => {
         button.addEventListener('click', function() {
-            currentProtectedSection = this.dataset.target;
-            passwordInput.value = ''; // Passwortfeld leeren
-            passwordError.style.display = 'none'; // Fehlermeldung ausblenden
+            currentProtectedSectionId = this.dataset.target;
+            passwordInput.value = ''; 
+            passwordError.style.display = 'none'; 
             passwordModal.style.display = 'flex';
             passwordInput.focus();
         });
@@ -1260,11 +1259,13 @@
     if(passwordSubmit) {
         passwordSubmit.onclick = function() {
             if (passwordInput.value === CORRECT_PASSWORD) {
-                const sectionToUnlock = document.getElementById(currentProtectedSection);
+                const sectionToUnlock = document.getElementById(currentProtectedSectionId);
                 if (sectionToUnlock) {
                     sectionToUnlock.classList.remove('hidden');
-                    // Den "Unlock-Button" für diesen Bereich ausblenden, da er nicht mehr benötigt wird
-                    document.querySelector(`.unlock-button[data-target="${currentProtectedSection}"]`).style.display = 'none';
+                    const unlockButtonForSection = document.querySelector(`.unlock-button[data-target="${currentProtectedSectionId}"]`);
+                    if (unlockButtonForSection) {
+                        unlockButtonForSection.style.display = 'none';
+                    }
                 }
                 passwordModal.style.display = 'none';
             } else {
@@ -1276,7 +1277,7 @@
     }
      passwordInput.addEventListener('keypress', function(event) {
         if (event.key === "Enter") {
-            event.preventDefault(); // Verhindert Standard-Formularabsendung
+            event.preventDefault(); 
             passwordSubmit.click();
         }
     });
